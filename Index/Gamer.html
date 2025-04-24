@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Art Quiz Game</title>
+  <link rel="icon" type="image/x-icon" href="../Images/unnamed.ico">
+  <link rel="Stylesheet" href="../Styles/more styles.css">
+  <style>
+   
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+      text-align: center;
+      padding: 20px;
+
+  
+    /* background-image:url("../Images/208780.jpg");*/
+    background-image:url("../images/Seamless wall white paint stucco plaster texture.jpg");
+    background-repeat:repeat;
+    background-size: 130px;
+    background-position: top center; /* Aligns the image to the left */
+    
+    color:rgb(0, 0, 0);
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  
+    }
+    img {
+      max-width: 90%;
+      height: auto;
+      margin-bottom: 20px;
+      border: 5px solid #ccc;
+    }
+    select, button {
+      padding: 10px;
+      font-size: 16px;
+      margin: 10px;
+    }
+    #result {
+      font-weight: bold;
+      margin-top: 20px;
+      font-size: 18px;
+    }
+  </style>
+  
+</head>
+<body>
+  <h1>Guess the Painting</h1>
+  <img id="painting" src="" alt="Random painting">
+
+  <div>
+    <select id="guess">
+      <option value="">Select a painting</option>
+      <option>Jackson Pollock – No. 5</option>
+      <option>Leonardo da Vinci – The Virgin and Child with St. Anne</option>
+      <option>Salvador Dalí – The Persistence of Memory</option>
+      <option>Leonid Afremov – Freshness of Cold in the Evening</option>
+      <option>Vincent van Gogh – Starry Night</option>
+      <option>Pablo Picasso – Guernica</option>
+      <option>Caravaggio – The Taking of Christ</option>
+      <option>Hokusai – The Great Wave off Kanagawa</option>
+    </select>
+    <br>
+    <button onclick="checkGuess()">Submit Guess</button>
+    <button onclick="loadNewPainting()">Next Painting</button>
+    <div id="result"></div>
+  </div>
+
+  <script>
+    const paintings = [
+    {
+    name: "Jackson Pollock – No. 5",
+    filename: "../images/Image-2-4.png"
+  },
+  {
+    name: "Leonardo da Vinci – The Virgin and Child with St. Anne",
+    filename: "../images/LDV7276-1000x1000.png"
+  },
+  {
+    name: "Salvador Dalí – The Persistence of Memory",
+    filename: "../images/The_Persistence_of_Memory.png"
+  },
+  {
+    name: "Leonid Afremov – Freshness of Cold in the Evening",
+    filename: "../images/freshness-of-cold.png"
+  },
+  {
+    name: "Vincent van Gogh – Starry Night",
+    filename: "../images/Van_Gogh_-_Starry_Night_-_Google_Art_Project.png"
+  },
+  {
+    name: "Pablo Picasso – Guernica",
+    filename: "../images/PicassoGuernica.png"
+  },
+  {
+    name: "Caravaggio – The Taking of Christ",
+    filename: "../images/w1500-Caravaggio-Taking-Christ.png"
+  },
+  {
+    name: "Hokusai – The Great Wave off Kanagawa",
+    filename: "../images/71leZkxiSyL.png"
+  }
+];
+
+    let currentPainting = null;
+
+    function loadNewPainting() {
+      const index = Math.floor(Math.random() * paintings.length);
+      currentPainting = paintings[index];
+      document.getElementById('painting').src = currentPainting.filename;
+      document.getElementById('result').textContent = '';
+      document.getElementById('guess').value = '';
+    }
+
+    function checkGuess() {
+      const guess = document.getElementById('guess').value;
+      if (guess === currentPainting.name) {
+        document.getElementById('result').textContent = 'Correct! 🎉';
+        document.getElementById('result').style.color = 'green';
+      } else {
+        document.getElementById('result').textContent = `Wrong. It was: ${currentPainting.name}`;
+        document.getElementById('result').style.color = 'red';
+      }
+    }
+
+    window.onload = loadNewPainting;
+  </script>
+  <a href="html.html">Back to Site</a>
+</body>
+</html>
